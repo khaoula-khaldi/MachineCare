@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const userRepository = require("../repositories/user.repository");
 
 const register = async(data)=>{
@@ -49,7 +50,8 @@ const login = async (data) => {
         throw new Error("Email ou mot de passe incorrect !");
     }
 
-    return user;
+    const token = jwt.sign({userId:user._id} , process.env.JWT_SECRET , {expiresIn:"1h"});
+    return {token};
 };
 
 module.exports = {register,login}
