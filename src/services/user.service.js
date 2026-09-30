@@ -24,4 +24,33 @@ const register = async(data)=>{
     }
     return userRepository.createUser(userData);
 }
-module.exports = {register}
+const login = async (data) => {
+
+    if (!data.email) {
+        throw new Error("email is required !");
+    }
+
+    if (!data.password) {
+        throw new Error("password is required !");
+    }
+
+    const user = await userRepository.findUserByEmail(data.email);
+
+    if (!user) {
+        throw new Error("Email ou mot de passe incorrect !");
+    }
+
+    const passwordCorrect = await bcrypt.compare(
+        data.password,
+        user.password
+    );
+
+    if (!passwordCorrect) {
+        throw new Error("Email ou mot de passe incorrect !");
+    }
+
+    return user;
+};
+
+module.exports = {register,login}
+
