@@ -22,7 +22,8 @@ const panneSchema = new mongoose.Schema(
         statut: {
             type: String,
             enum: ["ouvert", "en_cours", "resolu"],
-            required: true
+            required: true,
+            default: "ouvert"
         },
 
         note_resolution: {

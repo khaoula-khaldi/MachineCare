@@ -6,6 +6,7 @@ const usersRoutes = require("./src/routes/user.routes");
 const dashboardRoutes = require("./src/routes/dashboard.routes");
 const atelierRoute = require("./src/routes/atelier.routes");
 const machineRoute = require("./src/routes/machine.routes");
+const panneRoute = require("./src/routes/panne.routes");
 
 const app=express();
 app.use(express.json());
@@ -13,7 +14,7 @@ app.use("/api/users",usersRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/ateliers",atelierRoute);
 app.use("/api/machine",machineRoute);
-
+app.use("/api/pannes", panneRoute);
 
 connectDb();
 
