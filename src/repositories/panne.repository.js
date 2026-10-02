@@ -20,7 +20,10 @@ const updatePanne = (id, panneData) => {
     return Panne.findByIdAndUpdate(
         id,
         panneData,
-        { new: true }
+        {
+            new: true,
+            runValidators: true
+        }
     )
         .populate("machine_id")
         .populate("user_id");
