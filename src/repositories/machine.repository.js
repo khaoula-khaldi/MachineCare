@@ -1,8 +1,33 @@
 const Machine = require("../models/machine.model");
 
+const createMachine = (machineData) => {
+    return Machine.create(machineData);
+};
 
-const createMachine=(dataMachine)=>{
-    return Machine.create(dataMachine);
-}
+const getMachines = () => {
+    return Machine.find().populate("atelier_id");
+};
 
-module.exports = {createMachine}
+const getMachineById = (id) => {
+    return Machine.findById(id).populate("atelier_id");
+};
+
+const updateMachine = (id, machineData) => {
+    return Machine.findByIdAndUpdate(
+        id,
+        machineData,
+        { new: true }
+    ).populate("atelier_id");
+};
+
+const deleteMachine = (id) => {
+    return Machine.findByIdAndDelete(id);
+};
+
+module.exports = {
+    createMachine,
+    getMachines,
+    getMachineById,
+    updateMachine,
+    deleteMachine
+};
